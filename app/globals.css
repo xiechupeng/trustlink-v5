@@ -1,0 +1,73 @@
+@import "tailwindcss";
+
+/* ── TrustLink v2 Design Tokens ──────────────────────────── */
+:root {
+  --bg:        #f4f1ea;
+  --surface:   #fffdf8;
+  --surface-2: #ede8dd;
+  --ink:       #1c2230;
+  --ink-soft:  #4a505d;
+  --muted:     #8d8979;
+  --line:      rgba(28,34,48,.11);
+  --line-2:    rgba(28,34,48,.07);
+  --accent:    #b0863c;
+  --accent-soft: color-mix(in oklab, #b0863c 14%, #fffdf8);
+  --accent-line: color-mix(in oklab, #b0863c 38%, #fffdf8);
+  --accent-text: color-mix(in oklab, #b0863c, #000 18%);
+  --primary:   #1c2230;
+  --on-primary:#faf8f2;
+  --shadow:    0 1px 2px rgba(28,34,48,.05), 0 8px 24px -10px rgba(28,34,48,.14);
+}
+
+@theme inline {
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: -apple-system, BlinkMacSystemFont, "Noto Sans SC", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Avatar ──────────────────────────────────────────────── */
+.tl-avatar {
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 50%;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  font-weight: 600;
+  color: var(--ink);
+  flex-shrink: 0;
+}
+.tl-avatar.verified {
+  box-shadow: 0 0 0 2px var(--accent-soft);
+  border-color: var(--accent-line);
+}
+.tl-avatar .badge {
+  position: absolute; right: -2px; bottom: -2px;
+  width: 18px; height: 18px; border-radius: 50%;
+  background: var(--accent);
+  color: #fff; font-size: 9px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  border: 2px solid var(--surface);
+}
+.tl-avatar .badge-lg {
+  width: 24px; height: 24px; font-size: 11px;
+  right: 0; bottom: 0;
+}
+
+/* ── Category Icon (汉字方块) ─────────────────────────────── */
+.tl-icon {
+  width: 48px; height: 48px;
+  border-radius: 14px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 19px; font-weight: 700;
+  color: var(--accent-text);
+  flex-shrink: 0;
+  letter-spacing: 0;
+}
