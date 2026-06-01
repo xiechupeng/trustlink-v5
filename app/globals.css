@@ -59,15 +59,15 @@ body {
   right: 0; bottom: 0;
 }
 
-/* ── Category Icon (汉字方块) ─────────────────────────────── */
-.tl-icon {
+/* ── Category Icon (SVG line icon) ──────────────────────── */
+.cat-icon {
   width: 48px; height: 48px;
   border-radius: 14px;
   background: var(--surface);
   border: 1px solid var(--line);
   display: flex; align-items: center; justify-content: center;
-  font-size: 19px; font-weight: 700;
-  color: var(--accent-text);
   flex-shrink: 0;
-  letter-spacing: 0;
+}
+.cat-icon svg {
+  width: 22px; height: 22px;
 }

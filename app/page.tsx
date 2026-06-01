@@ -11,30 +11,75 @@ function initial(name: string) {
   return name?.trim()?.[0]?.toUpperCase() ?? "?";
 }
 
+// Language-neutral SVG line icons (24×24, stroke style)
+const S = "currentColor";
+const SW = "1.75";
+const CAT_ICONS: Record<string, React.ReactNode> = {
+  invest: (
+    <svg viewBox="0 0 24 24" fill="none" stroke={S} strokeWidth={SW} strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/>
+      <polyline points="16 7 22 7 22 13"/>
+    </svg>
+  ),
+  partner: (
+    <svg viewBox="0 0 24 24" fill="none" stroke={S} strokeWidth={SW} strokeLinecap="round" strokeLinejoin="round">
+      <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+      <circle cx="9" cy="7" r="4"/>
+      <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+      <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+    </svg>
+  ),
+  expert: (
+    <svg viewBox="0 0 24 24" fill="none" stroke={S} strokeWidth={SW} strokeLinecap="round" strokeLinejoin="round">
+      <rect x="2" y="7" width="20" height="14" rx="2"/>
+      <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+    </svg>
+  ),
+  creator: (
+    <svg viewBox="0 0 24 24" fill="none" stroke={S} strokeWidth={SW} strokeLinecap="round" strokeLinejoin="round">
+      <polygon points="23 7 16 12 23 17 23 7"/>
+      <rect x="1" y="5" width="15" height="14" rx="2"/>
+    </svg>
+  ),
+  talent: (
+    <svg viewBox="0 0 24 24" fill="none" stroke={S} strokeWidth={SW} strokeLinecap="round" strokeLinejoin="round">
+      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+      <circle cx="12" cy="7" r="4"/>
+    </svg>
+  ),
+  tester: (
+    <svg viewBox="0 0 24 24" fill="none" stroke={S} strokeWidth={SW} strokeLinecap="round" strokeLinejoin="round">
+      <path d="M9 3h6"/>
+      <path d="M9 3v9l-4.5 8.5A1 1 0 0 0 5.4 22h13.2a1 1 0 0 0 .9-1.5L15 12V3"/>
+      <path d="M6.5 18h11"/>
+    </svg>
+  ),
+};
+
 type NeedCategory = {
-  key: string; char: string;
+  key: string; iconKey: string;
   zh: string; en: string;
   desc_zh: string; desc_en: string;
-  color: string; arrowBg: string;
+  color: string; iconColor: string; arrowBg: string;
   groupZh?: string; groupEn?: string;
 };
 
 const NEED_CATEGORIES: NeedCategory[] = [
-  { key: "investor",              char: "投", zh: "寻找投资人",            en: "Looking for Investors",          desc_zh: "天使轮 · Pre-seed · 种子轮",         desc_en: "Angel · Pre-seed · Seed",            color: "bg-blue-50 border-blue-100",       arrowBg: "bg-blue-500",    groupZh: "商业合作", groupEn: "Business" },
-  { key: "cofounder",             char: "合", zh: "寻找合伙人",            en: "Looking for Co-founders",        desc_zh: "技术合伙人 · 运营 · 联合创始人",     desc_en: "Tech · Ops · Co-founder",            color: "bg-purple-50 border-purple-100",   arrowBg: "bg-purple-500" },
-  { key: "professional-services", char: "专", zh: "寻找专业服务",          en: "Professional Services",          desc_zh: "律师 · 会计 · 移民 · 跨境税务",      desc_en: "Legal · Accounting · Immigration",   color: "bg-indigo-50 border-indigo-100",   arrowBg: "bg-indigo-500",  groupZh: "专业服务", groupEn: "Pro Services" },
-  { key: "brand-creator",         char: "播", zh: "招募创作者 / 网红",     en: "Looking for Creators",           desc_zh: "内容合作 · 品牌推广 · 大使计划",     desc_en: "Content collab · Campaigns",         color: "bg-pink-50 border-pink-100",       arrowBg: "bg-pink-500",    groupZh: "品牌营销", groupEn: "Brand Marketing" },
-  { key: "talent-search",         char: "才", zh: "寻找人才 / 顾问",       en: "Talent & Consultant Search",     desc_zh: "全职 · 兼职 · 项目制 · 外部顾问",   desc_en: "Full-time · Part-time · Consulting", color: "bg-emerald-50 border-emerald-100", arrowBg: "bg-emerald-500", groupZh: "人才对接", groupEn: "Talent" },
-  { key: "product-trial",         char: "试", zh: "招募产品 / APP 试用者", en: "Looking for Product Testers",    desc_zh: "新品体验 · APP 内测 · 真实反馈",     desc_en: "Product trial · Beta · Feedback",    color: "bg-amber-50 border-amber-100",     arrowBg: "bg-amber-500",   groupZh: "产品推广", groupEn: "Product Trials" },
+  { key: "investor",              iconKey: "invest",  zh: "寻找投资人",            en: "Looking for Investors",          desc_zh: "天使轮 · Pre-seed · 种子轮",         desc_en: "Angel · Pre-seed · Seed",            color: "bg-blue-50 border-blue-100",       iconColor: "text-blue-500",    arrowBg: "bg-blue-500",    groupZh: "商业合作", groupEn: "Business" },
+  { key: "cofounder",             iconKey: "partner", zh: "寻找合伙人",            en: "Looking for Co-founders",        desc_zh: "技术合伙人 · 运营 · 联合创始人",     desc_en: "Tech · Ops · Co-founder",            color: "bg-purple-50 border-purple-100",   iconColor: "text-purple-500",  arrowBg: "bg-purple-500" },
+  { key: "professional-services", iconKey: "expert",  zh: "寻找专业服务",          en: "Professional Services",          desc_zh: "律师 · 会计 · 移民 · 跨境税务",      desc_en: "Legal · Accounting · Immigration",   color: "bg-indigo-50 border-indigo-100",   iconColor: "text-indigo-500",  arrowBg: "bg-indigo-500",  groupZh: "专业服务", groupEn: "Pro Services" },
+  { key: "brand-creator",         iconKey: "creator", zh: "招募创作者 / 网红",     en: "Looking for Creators",           desc_zh: "内容合作 · 品牌推广 · 大使计划",     desc_en: "Content collab · Campaigns",         color: "bg-pink-50 border-pink-100",       iconColor: "text-pink-500",    arrowBg: "bg-pink-500",    groupZh: "品牌营销", groupEn: "Brand Marketing" },
+  { key: "talent-search",         iconKey: "talent",  zh: "寻找人才 / 顾问",       en: "Talent & Consultant Search",     desc_zh: "全职 · 兼职 · 项目制 · 外部顾问",   desc_en: "Full-time · Part-time · Consulting", color: "bg-emerald-50 border-emerald-100", iconColor: "text-emerald-500", arrowBg: "bg-emerald-500", groupZh: "人才对接", groupEn: "Talent" },
+  { key: "product-trial",         iconKey: "tester",  zh: "招募产品 / APP 试用者", en: "Looking for Product Testers",    desc_zh: "新品体验 · APP 内测 · 真实反馈",     desc_en: "Product trial · Beta · Feedback",    color: "bg-amber-50 border-amber-100",     iconColor: "text-amber-500",   arrowBg: "bg-amber-500",   groupZh: "产品推广", groupEn: "Product Trials" },
 ];
 
 const OFFER_CATEGORIES = [
-  { key: "offer-investor",  char: "投", zh: "我是投资人",           en: "I'm an Investor",               desc_zh: "发布偏好 · 等创始人来找你",   desc_en: "Post thesis · Let founders find you", color: "bg-amber-50 border-amber-100",     arrowBg: "bg-amber-500" },
-  { key: "offer-cofounder", char: "合", zh: "我想当合伙人",         en: "I Want to Be a Co-founder",     desc_zh: "展示背景 · 开放合伙",         desc_en: "Show background · Open to co-found",  color: "bg-orange-50 border-orange-100",   arrowBg: "bg-orange-500" },
-  { key: "offer-expert",    char: "专", zh: "我提供专业服务",       en: "I Offer Professional Services",  desc_zh: "律师 · 会计 · 顾问",         desc_en: "Legal · Accounting · Advisory",       color: "bg-rose-50 border-rose-100",       arrowBg: "bg-rose-500" },
-  { key: "offer-creator",   char: "播", zh: "我是创作者 / 网红",    en: "I'm a Creator / Influencer",    desc_zh: "接受品牌合作 · 内容创作",     desc_en: "Open to brand deals · Content",       color: "bg-pink-50 border-pink-100",       arrowBg: "bg-pink-500" },
-  { key: "offer-talent",    char: "才", zh: "我是求职者 / 顾问",    en: "I'm a Job Seeker / Consultant", desc_zh: "展示背景 · 接受机会",         desc_en: "Show background · Open to roles",     color: "bg-emerald-50 border-emerald-100", arrowBg: "bg-emerald-500" },
-  { key: "offer-tester",    char: "试", zh: "我愿意试用产品 / APP", en: "I'm a Product Tester",          desc_zh: "体验新产品 · 提供真实反馈",   desc_en: "Try products · Give real feedback",   color: "bg-yellow-50 border-yellow-100",   arrowBg: "bg-yellow-500" },
+  { key: "offer-investor",  iconKey: "invest",  zh: "我是投资人",           en: "I'm an Investor",               desc_zh: "发布偏好 · 等创始人来找你",   desc_en: "Post thesis · Let founders find you", color: "bg-amber-50 border-amber-100",     iconColor: "text-amber-600",   arrowBg: "bg-amber-500" },
+  { key: "offer-cofounder", iconKey: "partner", zh: "我想当合伙人",         en: "I Want to Be a Co-founder",     desc_zh: "展示背景 · 开放合伙",         desc_en: "Show background · Open to co-found",  color: "bg-orange-50 border-orange-100",   iconColor: "text-orange-500",  arrowBg: "bg-orange-500" },
+  { key: "offer-expert",    iconKey: "expert",  zh: "我提供专业服务",       en: "I Offer Professional Services",  desc_zh: "律师 · 会计 · 顾问",         desc_en: "Legal · Accounting · Advisory",       color: "bg-rose-50 border-rose-100",       iconColor: "text-rose-500",    arrowBg: "bg-rose-500" },
+  { key: "offer-creator",   iconKey: "creator", zh: "我是创作者 / 网红",    en: "I'm a Creator / Influencer",    desc_zh: "接受品牌合作 · 内容创作",     desc_en: "Open to brand deals · Content",       color: "bg-pink-50 border-pink-100",       iconColor: "text-pink-500",    arrowBg: "bg-pink-500" },
+  { key: "offer-talent",    iconKey: "talent",  zh: "我是求职者 / 顾问",    en: "I'm a Job Seeker / Consultant", desc_zh: "展示背景 · 接受机会",         desc_en: "Show background · Open to roles",     color: "bg-emerald-50 border-emerald-100", iconColor: "text-emerald-500", arrowBg: "bg-emerald-500" },
+  { key: "offer-tester",    iconKey: "tester",  zh: "我愿意试用产品 / APP", en: "I'm a Product Tester",          desc_zh: "体验新产品 · 提供真实反馈",   desc_en: "Try products · Give real feedback",   color: "bg-yellow-50 border-yellow-100",   iconColor: "text-yellow-600",  arrowBg: "bg-yellow-500" },
 ];
 
 type FeaturedMember = { id: string; name: string; category: string; teaser: string | null; verified: boolean };
@@ -210,7 +255,7 @@ export default function HomePage() {
                     className={`flex items-center gap-4 rounded-2xl border px-4 py-4 transition-all hover:-translate-y-0.5 ${cat.color}`}
                     style={{ boxShadow: "var(--shadow)" }}
                   >
-                    <div className="tl-icon flex-shrink-0">{cat.char}</div>
+                    <div className={`cat-icon flex-shrink-0 ${cat.iconColor}`}>{CAT_ICONS[cat.iconKey]}</div>
                     <div className="flex-1 min-w-0">
                       <p className="font-bold text-sm mb-1.5" style={{ color: "var(--ink)" }}>{label}</p>
                       <div className="flex flex-wrap gap-1">
@@ -248,7 +293,7 @@ export default function HomePage() {
                   style={{ boxShadow: "var(--shadow)" }}
                 >
                   <div className="flex items-start justify-between">
-                    <div className="tl-icon">{cat.char}</div>
+                    <div className={`cat-icon ${cat.iconColor}`}>{CAT_ICONS[cat.iconKey]}</div>
                     <div className={`w-7 h-7 ${cat.arrowBg} rounded-full flex items-center justify-center`}>
                       <span className="text-white text-xs font-bold">›</span>
                     </div>
