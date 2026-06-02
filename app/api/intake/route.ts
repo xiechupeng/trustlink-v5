@@ -5,13 +5,13 @@ import { sendOwnerNotification, sendClientConfirmation } from "@/lib/email";
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { category, name, wechat, email, city, description, photoUrl, extraData } = body;
+    const { category, name, wechat, phone, email, city, description, photoUrl, extraData } = body;
 
     if (!category || !email) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
     }
 
-    const submissionData = { category, name, wechat, email, city, description, photoUrl, extraData: extraData || {} };
+    const submissionData = { category, name, wechat, phone, email, city, description, photoUrl, extraData: extraData || {} };
 
     // Store in Supabase
     const db = getServiceClient();
@@ -31,7 +31,7 @@ export async function POST(req: NextRequest) {
       wechat,
       email: email || null,
       teaser: teaser ? teaser.slice(0, 100) : null,
-      data: { city, description, ...extra },
+      data: { city, phone, description, ...extra },
       approved: false,
     });
 
