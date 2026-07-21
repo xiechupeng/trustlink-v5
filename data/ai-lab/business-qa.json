@@ -20,7 +20,7 @@
     "evidence": [
       {
         "id": "e1",
-        "text": "A reviewed sample of mid-market software-company career pages showed recurring openings for QA automation, SDET, platform engineering, and release-quality roles.",
+        "text": "In the reviewed sample, mid-market U.S. software companies often had formal QA teams and active automation hiring, including openings for QA automation, SDET, platform engineering, and release-quality roles.",
         "source": "Curated public career-page sample",
         "trust": 0.9,
         "freshness": 0.92
@@ -34,7 +34,7 @@
       },
       {
         "id": "e3",
-        "text": "Qualified-account review requires a verified need signal, an identifiable budget owner, technical integration fit, a reachable contact path, and evidence captured with a date and source.",
+        "text": "Account-level hiring, budget ownership, technical integration requirements, contactability, and dated evidence should be verified before outreach.",
         "source": "B2B qualification policy",
         "trust": 0.96,
         "freshness": 0.98
@@ -58,14 +58,14 @@
     "evidence": [
       {
         "id": "e4",
-        "text": "Embedding similarity captures semantic overlap, but commercial fit also depends on structured constraints, buying signals, account readiness, and source reliability.",
+        "text": "Semantic similarity is useful for candidate recall, but it is insufficient for a sales-ready recommendation because commercial fit also depends on structured constraints, buying signals, account readiness, and source reliability.",
         "source": "Retrieval and ranking design note",
         "trust": 0.94,
         "freshness": 0.95
       },
       {
         "id": "e5",
-        "text": "CRM export is permitted only when need, evidence quality, recency, identity resolution, contactability, and account risk pass configured thresholds.",
+        "text": "Before CRM export, business need, evidence quality, freshness, identity resolution, contactability, and account risk must pass configured thresholds.",
         "source": "Recommendation release gate",
         "trust": 0.98,
         "freshness": 0.99
