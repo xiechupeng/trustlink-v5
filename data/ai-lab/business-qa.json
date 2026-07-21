@@ -1,0 +1,75 @@
+[
+  {
+    "id": "pricing-intelligence-001",
+    "question": "Should a B2B AI testing startup prioritize mid-market software companies in the United States?",
+    "answer": "Mid-market U.S. software companies are a promising first segment because they often have formal QA teams, active automation hiring, and shorter procurement cycles than large enterprises. The recommendation should remain conditional: the startup should verify current hiring, budget ownership, and integration requirements for each account before outreach.",
+    "claims": [
+      {
+        "text": "Mid-market U.S. software companies often have formal QA teams and active automation hiring.",
+        "evidenceIds": ["e1"]
+      },
+      {
+        "text": "Mid-market companies always have shorter procurement cycles than large enterprises.",
+        "evidenceIds": ["e2"]
+      },
+      {
+        "text": "Account-level hiring, budget ownership, and integration requirements should be verified before outreach.",
+        "evidenceIds": ["e3"]
+      }
+    ],
+    "evidence": [
+      {
+        "id": "e1",
+        "text": "A reviewed sample of mid-market software-company career pages showed recurring openings for QA automation, SDET, platform engineering, and release-quality roles.",
+        "source": "Curated public career-page sample",
+        "trust": 0.9,
+        "freshness": 0.92
+      },
+      {
+        "id": "e2",
+        "text": "Procurement duration varies substantially by security review, data sensitivity, contract value, integration depth, and internal governance; company size alone is not determinative.",
+        "source": "Enterprise sales process rubric",
+        "trust": 0.86,
+        "freshness": 0.85
+      },
+      {
+        "id": "e3",
+        "text": "Qualified-account review requires a verified need signal, an identifiable budget owner, technical integration fit, a reachable contact path, and evidence captured with a date and source.",
+        "source": "B2B qualification policy",
+        "trust": 0.96,
+        "freshness": 0.98
+      }
+    ]
+  },
+  {
+    "id": "citation-grounding-002",
+    "question": "Can a recommendation be sent directly to sales when only semantic similarity is available?",
+    "answer": "No. Semantic similarity is useful for candidate recall, but it is not sufficient for a sales-ready recommendation. The system should also validate business need, evidence quality, freshness, contactability, and risk before exporting an account to CRM.",
+    "claims": [
+      {
+        "text": "Semantic similarity is useful for candidate recall but is insufficient for a sales-ready recommendation.",
+        "evidenceIds": ["e4"]
+      },
+      {
+        "text": "Business need, evidence quality, freshness, contactability, and risk should be checked before CRM export.",
+        "evidenceIds": ["e5"]
+      }
+    ],
+    "evidence": [
+      {
+        "id": "e4",
+        "text": "Embedding similarity captures semantic overlap, but commercial fit also depends on structured constraints, buying signals, account readiness, and source reliability.",
+        "source": "Retrieval and ranking design note",
+        "trust": 0.94,
+        "freshness": 0.95
+      },
+      {
+        "id": "e5",
+        "text": "CRM export is permitted only when need, evidence quality, recency, identity resolution, contactability, and account risk pass configured thresholds.",
+        "source": "Recommendation release gate",
+        "trust": 0.98,
+        "freshness": 0.99
+      }
+    ]
+  }
+]
