@@ -1,0 +1,72 @@
+[
+  {
+    "id": "task-001",
+    "title": "Add evidence freshness to recommendation API",
+    "category": "feature implementation",
+    "acceptanceCriteria": [
+      "Expose freshness score in structured output",
+      "Reject records with invalid timestamps",
+      "Add unit coverage for stale and fresh evidence",
+      "Preserve existing API response fields"
+    ],
+    "contextFiles": [
+      "lib/ai-lab/scoring.ts",
+      "data/ai-lab/companies.json",
+      "app/ai-lab/market-intelligence/page.tsx"
+    ],
+    "generatedTests": 6,
+    "testsPassed": 6,
+    "testsFailed": 0,
+    "reviewFindings": ["Add an explicit timezone note to the schema documentation"],
+    "blockerCount": 0,
+    "latencySeconds": 82,
+    "costUsd": 0.34
+  },
+  {
+    "id": "task-002",
+    "title": "Fix unsupported-claim release gate",
+    "category": "bug fix",
+    "acceptanceCriteria": [
+      "Block answers above the unsupported-claim threshold",
+      "Preserve claim-level diagnostics",
+      "Return a human-review reason",
+      "Add a regression test for mixed evidence"
+    ],
+    "contextFiles": [
+      "lib/ai-lab/scoring.ts",
+      "data/ai-lab/business-qa.json"
+    ],
+    "generatedTests": 5,
+    "testsPassed": 4,
+    "testsFailed": 1,
+    "reviewFindings": [
+      "Threshold is duplicated instead of centralized",
+      "Failure path lacks a structured error code"
+    ],
+    "blockerCount": 1,
+    "latencySeconds": 104,
+    "costUsd": 0.42
+  },
+  {
+    "id": "task-003",
+    "title": "Refactor fit-score weights into configuration",
+    "category": "refactoring",
+    "acceptanceCriteria": [
+      "Move weights to a typed configuration object",
+      "Validate weights sum to one",
+      "Keep existing ranking order on the golden dataset",
+      "Document each feature contribution"
+    ],
+    "contextFiles": [
+      "lib/ai-lab/scoring.ts",
+      "data/ai-lab/companies.json"
+    ],
+    "generatedTests": 7,
+    "testsPassed": 7,
+    "testsFailed": 0,
+    "reviewFindings": [],
+    "blockerCount": 0,
+    "latencySeconds": 68,
+    "costUsd": 0.27
+  }
+]
