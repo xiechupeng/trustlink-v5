@@ -1,0 +1,52 @@
+name: Applied AI Portfolio CI
+
+on:
+  pull_request:
+    paths:
+      - "app/ai-lab/**"
+      - "lib/ai-lab/**"
+      - "data/ai-lab/**"
+      - "scripts/run-portfolio-evals.mjs"
+      - ".github/workflows/ai-portfolio.yml"
+  push:
+    branches: [main]
+    paths:
+      - "app/ai-lab/**"
+      - "lib/ai-lab/**"
+      - "data/ai-lab/**"
+      - "scripts/run-portfolio-evals.mjs"
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Build Next.js application
+        run: npm run build
+
+      - name: Run reproducible AI portfolio evaluations
+        run: node scripts/run-portfolio-evals.mjs
+
+      - name: Upload evaluation scorecard
+        uses: actions/upload-artifact@v4
+        with:
+          name: ai-portfolio-eval
+          path: artifacts/ai-portfolio-eval.json
+          if-no-files-found: error
