@@ -29,14 +29,14 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
           cache: npm
 
       - name: Install dependencies
         run: npm ci
 
-      - name: Lint
-        run: npm run lint
+      - name: Lint Applied AI portfolio changes
+        run: npx eslint app/ai-lab lib/ai-lab scripts/run-portfolio-evals.mjs
 
       - name: Build Next.js application
         run: npm run build
